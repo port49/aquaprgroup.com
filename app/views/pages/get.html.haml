@@ -1,0 +1,33 @@
+- if (@resource.links.nil? || @resource.links.empty?) && @resource.children.empty? && (@resource.parent.children.empty? || @resource.parent.name == "root" || @resource.parent.name == "Home Page")
+  #simple-page.grid_12
+    %h1
+      = @resource.name
+    = raw @resource.body  
+-else
+  #main.grid_12
+    #navigation.grid_3
+      - if @resource.parent.name != "Home Page" && @resource.parent.name != "root"
+        %dl
+          %dt
+            = link_to @resource.parent.name, @resource.parent
+      - @resource.children.each do |page|
+        %dl
+          %dt
+            = link_to page.name, page
+          - unless page.links.nil? ||  page.links.empty?
+            - page.links.each do |link|
+              %dd
+                = link_to link[:title], link[:url]
+      - unless @resource.parent.name == "Home Page"
+        - @resource.parent.children.each do |page|
+          %dl
+            %dt
+              = link_to page.name, page
+            - unless page.links.nil? ||  page.links.empty?
+              - page.links.each do |link|
+                %dd
+                  = link_to link[:title], link[:url]
+    #content.grid_9
+      %h1
+        = @resource.name
+      =  raw @resource.body

@@ -1,0 +1,26 @@
+#main.grid_12
+  #navigation.grid_3
+    = render :partial => "layouts/top_level_navigation", :locals => {:page => Page.where(:name => "Home Page").first}
+  #content.grid_9
+    .news-page
+      %h1
+        = @news.name
+      .medium-image-container
+        = image_tag @news.image.url(:medium)
+        %p
+          = @news.image_caption
+      %p.details
+        %span.date
+          = @news.release_date.strftime("%A, %B #{@news.release_date.day.ordinalize}, %Y")          
+        %span.bullet
+          &bull;
+        %span.category
+          = @news.news_categories.first.name
+        %span.bullet
+          &bull;
+        %span.id
+          = @news.catalog_id
+      = raw @news.body
+      /
+        = @news.inspect
+      

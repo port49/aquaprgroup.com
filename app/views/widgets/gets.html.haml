@@ -1,0 +1,36 @@
+.grid_16.ui-accordion-header.ui-state-default
+  %h3.ui-helper-reset
+    Listing Widgets
+.clear
+.grid_16.ui-widget-header.ui-border-sides.ui-button-bar
+  .float-left
+    = link_to 'New...', widget_path(:id => 0), :class => 'ui-button icon-new'
+    .separator
+  .float-right.ui-search
+    %form{:method => "get", :action => ""}
+      %input.ui-state-default.ui-corner-right.ui-silver{:type => "submit", :name => 'submit', :value => 'Search'}
+      %input.ui-corner-left{:type => "text", :name => "search",  :class => "autocomplete", :autocomplete => "off", :value => (params[:search] || "")}
+.clear
+.grid_16.ui-widget-header.ui-border-sides
+  %table.ui-resources
+    %thead
+      %tr
+        %th
+          = rickets_header "name", "Name"
+        %th
+          Description
+        %th
+          = rickets_header "updated_at", "Updated At"
+    %tbody#datagrid_tbody
+      -@resources.each do |resource|
+        %tr{:onclick => "Rickets.showRow(this);", :id => singular_path(resource)}
+          %td
+            = link_to h(resource.name), singular_path(resource)
+          %td
+            =h resource.description
+          %td
+            =date_format resource.updated_at
+.grid_16.ui-widget-header.ui-corner-bottom
+  .pagination_info.ui-helper-reset
+    = raw(page_entries_info @resources)
+  = will_paginate @resources, :previous_label => "<span class='prev'>&nbsp;&nbsp;&nbsp;&nbsp;</span>", :next_label => "<span class='next'>&nbsp;&nbsp;&nbsp;&nbsp;</span>"

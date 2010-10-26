@@ -1,0 +1,8 @@
+.footer
+  .button-shell.ui-corner-all
+    %input.wymupdate.ui-corner-all{:type => 'submit', :value => (resource.new_record? ? 'Create' : 'Save')}
+  - if resource.respond_to?(:load_pending) && resource.is_pending?
+    .button-shell.ui-corner-all
+      %input.wymupdate.ui-corner-all{:type => 'submit', :name => 'publish', :value => 'Publish'}
+  .button-shell.ui-corner-all
+    %button.ui-corner-all{:type => 'button', :onclick => "document.location='#{admin_plural_path(resource)}';return false;"} Cancel

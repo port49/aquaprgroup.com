@@ -1,0 +1,11 @@
+- resource.load_pending
+%tr{:onclick => "Rickets.showRow(this);", :id => admin_singular_path(resource)}
+  %td
+    =raw('&nbsp;' * 4 * tab)
+    = link_to h(resource.name), admin_singular_path(resource)
+  %td
+    =h resource.is_published? ? 'published' : 'pending'
+  %td
+    =date_format resource.updated_at
+- resource.children.each do |child|
+  = render :partial => 'gets', :locals => {:resource => child, :tab => tab + 1}

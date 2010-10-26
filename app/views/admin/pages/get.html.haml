@@ -1,0 +1,47 @@
+.grid_16.ui-accordion-header.ui-state-default
+  %h3.ui-helper-reset
+    Widget:
+    = @resource.name
+.clear
+- unless @resource.new_record?
+  .grid_16.ui-widget-header.ui-border-sides.ui-button-bar
+    .float-left
+      = link_to 'Delete...', admin_singular_path(@resource), :confirm => "Are you sure you want to delete #{@resource.name}?", :method => :delete, :class => 'ui-button icon-destroy'
+  .clear
+.grid_16.ui-widget-content.ui-corner-bottom
+  = form_for(@resource, :url => admin_singular_path(@resource)) do |f|
+    .field
+      %label Name:
+      = f.text_field :name, :class => 'string'
+    .field
+      %label Parent Page:
+      = f.select :parent_id, @resource.hierarchy_for_select
+      = indented_option_tags
+    .field
+      %label Links:
+      .panel
+        .field
+          %label Title:
+          = text_field_tag 'links_title', '', :class => 'string'
+        .field
+          %label Url:
+          = text_field_tag 'links_url', '', :class => 'string'
+        .field
+          .float-right
+            .button-shell.ui-corner-all
+              %button.ui-corner-all{:type => 'button', :onclick => "Rickets.createLinkListItem($('ul#links'), 'page');return false;"} Add Link
+        .clear
+        %ul#links.sortable
+          - if @resource.links
+            - @resource.links.each do |link|
+              %li
+                = link_to link[:title], link[:url], :target => :blank
+                = hidden_field_tag 'page[links][][title]', link[:title]
+                = hidden_field_tag 'page[links][][url]', link[:url]
+                %button.small-inline.ui-corner-all{:type => 'button', :onclick => '$(this.parentNode).remove()'} x
+        :javascript
+          $('ul.sortable').sortable();
+    .clear
+    .field
+      = f.text_area :body, :class => 'wymeditor'
+    = render 'admin/extish_rickets/footer', :resource => @resource

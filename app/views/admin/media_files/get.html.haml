@@ -1,0 +1,25 @@
+.grid_16.ui-accordion-header.ui-state-default
+  %h3.ui-helper-reset
+    Media File:
+    = @resource.name
+.clear
+- unless @resource.new_record?
+  .grid_16.ui-widget-header.ui-border-sides.ui-button-bar
+    .float-left
+      = link_to 'Delete...', admin_singular_path(@resource), :confirm => "Are you sure you want to delete #{@resource.name}?", :method => :delete, :class => 'ui-button icon-destroy'
+  .clear
+.grid_16.ui-widget-content.ui-corner-bottom
+  = form_for(@resource, :url => admin_singular_path(@resource), :html => {:multipart => true}) do |f|
+    .field
+      %label Name:
+      = f.text_field :name, :class => 'string'
+    .field
+      %label Description:
+      = f.text_area :description, :class => 'short'
+    .field
+      %label Picture:
+      = f.file_field :binary
+    - unless @resource.binary_file_size.nil?
+      .field
+        = image_tag @resource.binary.url, :style => 'overflow:hidden'
+    = render 'admin/extish_rickets/footer', :resource => @resource

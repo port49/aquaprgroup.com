@@ -1,0 +1,47 @@
+%head
+  %meta{"http-equiv".to_sym => "Content-Type", :content => "text/html; charset=utf-8"}
+  %title
+    Media Files
+  = stylesheet_link_tag "rickets/blue"
+  = javascript_include_tag '../jquery-ui/js/jquery-1.4.2.min'
+  = javascript_include_tag '../wymeditor/jquery.wymeditor.pack.js'
+
+%body.wym_dialog.wym_dialog_image{:onload => "WYMeditor.INIT_DIALOG(0)"}
+  %table
+    - i = 0
+    - 3.times do
+      %tr
+        - 3.times do
+          %td{:style => 'width:30%;'}
+            - if resource = @resources[i]
+              - unless resource.binary_file_size.nil?
+                = link_to_function image_tag(resource.binary(:thumb)), wymeditor_image_insert_link(resource)
+                %h4
+                  = link_to_function resource.name, wymeditor_image_insert_link(resource)
+            - i += 1
+    %tfoot
+      %tr
+        %td{:colspan => "3"}
+          .pagination_info
+            = page_entries_info @resources
+          = will_paginate @resources, :prev_label => "<span class='prev'>&nbsp;&nbsp;&nbsp;&nbsp;</span>", :next_label => "<span class='next'>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+  %form
+    %fieldset
+      %input.wym_dialog_type{:type => 'hidden', :value => 'Image'}
+      %legend
+        External Media File
+      .row
+        %label
+          URL
+        %input.wym_src{:type => 'text', :value => '', :size => '40'}
+      .row
+        %label
+          Alternative Text
+        %input.wym_alt{:type => 'text', :value => '', :size => '40'}
+      .row
+        %label
+          Title
+        %input.wym_title{:type => 'text', :value => '', :size => '40'}
+      .row.row-indent
+        %input.wym_submit{:type => 'button', :value => 'Submit'}
+        %input.wym_cancel{:type => 'button', :value => 'Cancel'}

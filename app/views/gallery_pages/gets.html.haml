@@ -1,0 +1,31 @@
+#main.grid_12
+  #navigation.grid_3
+    = render :partial => "layouts/top_level_navigation", :locals => {:page => Page.where(:name => "Home Page").first}
+  #content.grid_9
+    %h1
+      = @resource.name
+    .gallery-page
+      = raw @resource.body
+    - @gallery_resources.each do |resource|
+      .info-bubble
+        %h5
+          = link_to resource.title, resource.link
+        - if resource.thumbnail.nil?
+          .thumbnail-image-container
+            = link_to (image_tag resource.image), resource.link
+        -else
+          .thumbnail-image-container
+            = link_to (image_tag resource.thumbnail), resource.link
+        %p.date
+          = resource.date.strftime("%A, %B #{resource.date.day.ordinalize}, %Y")
+        %p
+          %span.category
+            = resource.category
+          - unless resource.guid.nil?
+            %span.bullet
+              &bull;
+            %span.id
+              = resource.guid
+        %p.abstract
+          = resource.description.slice!(0..256)
+          = link_to "More ...", resource.link

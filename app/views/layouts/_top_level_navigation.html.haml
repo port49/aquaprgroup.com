@@ -1,0 +1,30 @@
+%dl
+  %dt
+    = link_to "News", "/news"
+  %dt
+    = link_to "Gallery", "/gallery"
+- unless page.links.nil? || page.links.empty?
+  %dl
+    %dt
+      = page.name
+      Links
+      - page.links.each do |link|
+        %dd
+          = link_to link[:title], link[:url]
+- page.children.each do |page|
+  %dl
+    %dt
+      = link_to page.name, page
+    - unless page.links.nil? || page.links.empty?
+      - page.links.each do |link|
+        %dd
+          = link_to link[:title], link[:url]
+    - unless page.children.nil? || page.children.empty?
+      - page.children.each do |sub_page|
+        %dd
+          %dl
+            %dt
+              = link_to sub_page.name, sub_page
+            - sub_page.links.each do |sub_link|
+              %dd
+                = link_to sub_link[:title], sub_link[:url]

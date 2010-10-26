@@ -1,0 +1,8 @@
+- @resources.each do |resource|
+  %h1
+    = resource.title
+  - resource.images.each do |image|
+    %a{:href => image.link}
+      %img{:src => image.thumbnail}
+      %span
+        = image.title

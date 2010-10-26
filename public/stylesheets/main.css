@@ -1,0 +1,266 @@
+body {
+	background: #000;
+    background-image: url(../images/PageBackground.jpg);
+    background-repeat: repeat-y;
+    background-position: top center;
+	color: #333;
+	font-size: 11px;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #96f226;
+}
+
+a.more {
+	background: url("../images/RightArrow.png") no-repeat scroll right center transparent;
+	padding-right: 16px;
+}
+
+#header {
+	background-image: url(../images/Header.png);
+	height: 95px;
+}
+
+#header a {
+	display: block;
+	position: relative;
+}
+
+#header a.ipac {
+	top: 3px;
+	left: 21px;
+	height: 88px;
+	width: 177px;
+	float: left;
+}
+
+#header a.nasa {
+	top: 9px;
+	right: 33px;
+	height: 78px;
+	width: 79px;
+	float: right;
+}
+
+#sections {
+	background-image: url(../images/Sections.jpg);
+	height: 32px;
+}
+
+#sections ul {
+	font-size: 18px;
+	padding-top: 2px;
+	font-variant: small-caps;
+}
+
+#sections ul li {
+	display: inline;
+	margin-left: 32px;
+}
+
+#sections ul li a:link, #sections ul li a:visited, #sections ul li a:active {
+	padding: 4px 7px 4px 7px;
+	font-weight: normal;
+	color: #FFF;
+}
+
+#sections ul li a.selected  {
+	background-image: url(../images/SectionsSelected.jpg);
+	border-right: 1px solid #cc9900;
+	border-left: 1px solid #cc9900;
+}
+
+#sections ul li a:hover {
+	color: #96f226;
+}
+
+#main {
+	background: #FFF;
+	background-image: url(../images/Navigation.jpg);
+    background-repeat: repeat-y;
+    background-position: bottom left;
+    width: 940px;
+    margin-left: 10px;
+}
+
+#navigation {
+/* 	background-image: url(../images/NavigationFade.png); */
+    background-repeat: repeat-y;
+    background-position: bottom left;
+	margin: 0px;
+	color: #000;
+	padding-bottom: 25px;
+}
+
+#navigation dl {
+	padding: 10px 10px 0px 10px;
+}
+
+#navigation dt {
+	font-weight: bold;
+	font-size: 14px;
+	padding: 0px 0px 2px 0px;
+	color: #333;
+}
+
+#navigation dd {
+	padding: 0px 0px 2px 0px;
+}
+
+#navigation dl dd {
+	padding: 0px 0px 0px 5px;
+}
+
+#navigation dl dd dl {
+	padding: 0px 0px 0px 5px;
+}
+
+#navigation dd a:link, #navigation dd a:active, #navigation dd a:visited {
+	color: #000;
+}
+
+#navigation dd a:hover {
+	color: #96f226;
+}
+
+#content {
+	color: #000;
+	background: #FFF;
+	width: 690px;
+	margin: 0px;
+	padding: 0px 15px 15px 15px;
+}
+
+p {
+	margin-top: 10px;
+}
+
+h1, h2, h3 {
+	padding: 0px 0px 0px 5px;
+	font-weight: normal;
+	margin-top: 10px;
+	font-variant: small-caps;
+	background-image: url(../images/ShadedGreenTile.png);
+	font-weight: bold;
+	color: #333;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#content div.info-bubble {
+	width: 340px;
+	margin: 10px 5px 0px 0px;
+	float: left;
+	background-color: #FFF;
+	min-height: 200px;
+}
+
+#content div.info-bubble div.thumbnail-image-container {
+	width: 155px;
+	height: 155px;
+	float: left;
+	margin-right: 5px;
+	background-color: #FFF;
+	text-align: center;
+	overflow: hidden;
+}
+
+#content div.info-bubble img {
+	height: 100%;
+}
+
+#content div.info-bubble p {
+	margin: 0px;
+}
+
+#content div.home-page {
+}
+
+#content div.news-page {
+}
+
+#content div.gallery-page {
+}
+
+#content div.headlines {
+}
+
+#content div.headlines h5 {
+	margin-top: 5px;
+}
+
+#content div.headlines p {
+	margin: 0px;
+}
+
+#simple-page {
+	padding: 0 10px 10px;
+	width: 920px;
+}
+
+#content div.news-page div.medium-image-container {
+	float: left;
+	border: 1px solid #999;
+	padding: 5px;
+	background-color: #EEE;
+	margin: 10px 10px 0 0;
+	width: 250px;
+}
+
+#content div.news-page div.medium-image-container p {
+	margin: 0px;
+}
+
+
+#footer {
+	background-image: url(../images/FooterBackground.jpg);
+    background-repeat: repeat-x;
+    background-position: top left;
+	border-top: 1px solid #000;
+	border-bottom: 15px solid #222;
+	background-color: #fff;
+	height: 200px;
+	width: 940px;
+	text-align: center;
+}
+
+#footer .links {
+	padding: 15px 0px 10px 0px;
+	color: #777;
+}
+
+#footer .links a:link, #footer .links a:active, #footer .links a:visited {
+	color: #000;
+	padding: 0px 10px 0px 10px;
+	font-size: 14px;
+}
+
+#footer .links a:hover {
+	color: #555;
+}
+
+#footer .partners img {
+	vertical-align: top;
+	padding: 0px 25px 0px 25px;
+}
+
+#footer p {
+	padding: 5px 140px 0px 140px;
+}
+
+span.bullet {
+	color: #96f226;
+	color: #cc9900;
+}
+
+span.category {
+	color: #444;
+	font-weight: bold;
+}
+
