@@ -1,22 +1,50 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+default_run_options[:pty] = true
+set :repository,  'git@github.com:port49/aquaprgroup.com.git'
 
-set :scm, :subversion
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :scm, :git
+set :ssh_options, {:forward_agent => true}
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :runner, 'aqua'
+set :branch, 'master'
+set :deploy_via, :remote_cache
 
-# If you are using Passenger mod_rails uncomment this:
-# if you're still using the script/reapear helper you will need
-# these http://github.com/rails/irs_process_scripts
+set :application, "aqua"
+set :deploy_to, "/var/www/html"
+set :default_environment, { 
+  'PATH' => "/usr/local/rvm/rubies/ruby-1.9.2-p0/bin:/usr/local/rvm/gems/ruby-1.9.2-p0:$PATH",
+  'RUBY_VERSION' => 'ruby 1.9.2',
+  'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.2-p0/gems',
+  'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.2-p0/gems' 
+}
 
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+role :app, "aqua"
+role :web, "aqua"
+role :db,  "aqua", :primary => true
+
+namespace :passenger do
+  desc 'Restart Application'
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+namespace :deploy do
+  # Restart passenger on deploy
+  desc "Restarting mod_rails with restart.txt"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+  
+  desc "Overrides the default because of the rake location"
+  task :seed do
+    run "cd #{current_path}; rake RAILS_ENV=production db:seed"
+  end
+
+  desc "Link in the production database.yml" 
+  task :after_update_code do
+    run "ln -nfs #{deploy_to}/#{shared_dir}/system/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{deploy_to}/#{shared_dir}/system/uploads #{release_path}/public/system"
+  end
+end
+
+after :deploy, 'deploy:cleanup'
