@@ -11,8 +11,6 @@ gem "will_paginate", "3.0.pre"
 gem "nokogiri", :require => 'nokogiri'
 gem 'capybara'
 gem 'database_cleaner'
-gem 'cucumber-rails'
-gem 'cucumber', '0.7.2'
 gem 'spork'
 gem 'launchy'
 gem 'paperclip'
