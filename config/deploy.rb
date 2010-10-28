@@ -9,13 +9,7 @@ set :branch, 'master'
 set :deploy_via, :remote_cache
 
 set :application, "aqua"
-set :deploy_to, "/var/www/html"
-set :default_environment, { 
-  'PATH' => "/usr/local/rvm/rubies/ruby-1.9.2-p0/bin:/usr/local/rvm/gems/ruby-1.9.2-p0:$PATH",
-  'RUBY_VERSION' => 'ruby 1.9.2',
-  'GEM_HOME' => '/usr/local/rvm/gems/ruby-1.9.2-p0/gems',
-  'GEM_PATH' => '/usr/local/rvm/gems/ruby-1.9.2-p0/gems' 
-}
+set :deploy_to, "/home/aqua/www"
 
 role :app, "aqua"
 role :web, "aqua"
