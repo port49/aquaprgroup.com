@@ -4,42 +4,26 @@
   %head
     %meta{"http-equiv".to_sym => "Content-Type", :content => "text/html; charset=utf-8"}
     %title
-      Infrared Processing and Analysis Center
+      Herschel Space Observatory
     = stylesheet_link_tag 'reset'
     = stylesheet_link_tag 'text'
     = stylesheet_link_tag '960'
     = stylesheet_link_tag 'main'
     = csrf_meta_tag
   %body
-    .container_12
-      #header.grid_12
-        = link_to "", "/", :class => "ipac"
-        = link_to "", "http://www.nasa.gov", :class => "nasa"
-      #sections.grid_12
-        %ul
-          %li
-            = link_to "Home", "/", :class => (@resource.name == "Home Page" ? 'selected' : '')
-          %li
-            = link_to "About IPAC", Page.where(:name => "About IPAC").first
-          %li
-            = link_to "Missions & Programs", Page.where(:name => "Missions & Programs").first
-          %li
-            = link_to "Science Research", Page.where(:name => "Science Research").first
-          %li
-            = link_to "Education & Outreach", Page.where(:name => "Education & Outreach").first
-      = yield
-      #footer.grid_12
-        .links
-          = link_to "Feedback", Page.where(:name => "Feedback").first
-          &bull; 
-          = link_to "Privacy Policy", Page.where(:name => "Privacy Policy").first
-          &bull; 
-          = link_to "Image Use Policy", Page.where(:name => "Image Use Policy").first
-        .partners
-          = link_to image_tag('FooterIPAC.png', :title => "Infrared Processing and Analysis Center"), "http://www.ipac.caltech.edu"
-          = link_to image_tag('FooterCaltech.png', :title => "California Institue of Technology"), "http://www.caltech.edu"
-          = link_to image_tag('FooterJPL.png', :title => "Jet Propulsion Laboratory"), "http://jpl.nasa.gov"
-          = link_to image_tag('FooterNASA.png', :title => "National Aeronautics and Space Administration"), "http://www.nasa.gov"
-        %p
-          The Infrared Processing and Analysis Center is a NASA data center managed by the Jet Propulsion Laboratory. This website is maintained by the Infrared Processing and Analysis Center, located on the campus of the California Institute of Technology.
-      .clear
+    .container.container_12
+      = render 'layouts/navigation'
+      #content.container_12
+        %p.site-blurb NASA Herschel Science Center's Portal to the Cool Universe
+        = yield
+        .clear
+    .privacy-policy.container_12
+      %p
+        = link_to "Privacy Policy", Page.where(:name => "Privacy Policy").first
+    .mission-logos
+      = link_to  (image_tag "esa.png", :title => "European Space Agency", :alt => "European Space Agency"), "http://www.esa.int"
+      = link_to  (image_tag "nasa.png", :title => "National Aeronautics and Space Administration", :alt => "National Aeronautics and Space Administration"), "http://www.nasa.gov"
+      = link_to  (image_tag "jpl.png", :title => "Jet Propulsion Laboratory", :alt => "Jet Propulsion Laboratory"), "http://jpl.nasa.gov"
+      = link_to  (image_tag "caltech.png", :title => "California Institue of Technology", :alt => "California Institue of Technology"), "http://www.caltech.edu"
+      = link_to  (image_tag "ipac.png", :title => "Infrared Processing and Analysis Center", :alt => "Infrared Processing and Analysis Center"), "http://www.ipac.caltech.edu"
+      = link_to  (image_tag "nhsc.png", :title => "NASA Herschel Science Center", :alt => "NASA Herschel Science Center"), "https://nhscsci.ipac.caltech.edu/"

@@ -27,7 +27,7 @@ module ExtishRicketsHelper
   def ricket_tab(resource_class, options={})
     options[:name] ||= resource_class.name.pluralize
     options[:url] ||= self.send("admin_#{resource_class.table_name}_path", options[:params])
-    options[:selected] ||= params[:controller] == "admin/#{resource_class.table_name}"
+    options[:selected] ||= params[:controller] == "admin_#{resource_class.table_name}"
     raw("<li class='ui-state-default ui-corner-top ui-tab#{options[:selected] ? '-selected' : ''}'>#{link_to options[:name], options[:url]}</li>")
   end
 
@@ -70,4 +70,16 @@ JS
     )
   end
 
+  def plus_or_minus_fields(avm_data, name)
+    html = ""
+    (avm_data[name] || []).each do |avm_data_minus|
+      unless avm_data_minus == avm_data[name].first
+        html << "<div class='field'>"
+        html << "<label>&nbsp;</label>"
+        html << text_field_tag("avm_image[pending_avm_data][#{name}][]", avm_data_minus, :class => 'string minus')
+        html << "</div>"
+      end
+    end
+    raw html
+  end
 end

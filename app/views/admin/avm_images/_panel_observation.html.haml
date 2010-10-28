@@ -1,0 +1,40 @@
+#avm-observation.field{:style => 'display:none'}
+  .field
+    %label Facility:
+    = text_field_tag 'avm_image[pending_avm_data][facility][]', avm_data['facility'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'facility')
+  .field
+    %label Instrument:
+    = text_field_tag 'avm_image[pending_avm_data][instrument][]', avm_data['instrument'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'instrument')
+  .field
+    %label Spectral.ColorAssignment:
+    = text_field_tag 'avm_image[pending_avm_data][spectral_colorassignment][]', avm_data['spectral_colorassignment'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'spectral_colorassignment')
+  .field
+    %label Spectral.Band:
+    = text_field_tag 'avm_image[pending_avm_data][spectral_band][]', avm_data['spectral_band'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'spectral_band')
+  .field
+    %label Spectral.Bandpass:
+    = text_field_tag 'avm_image[pending_avm_data][spectral_bandpass][]', avm_data['spectral_bandpass'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'spectral_bandpass')
+  .field
+    %label Spectral.CentralWavelength:
+    = text_field_tag 'avm_image[pending_avm_data][spectral_centralwavelength][]', avm_data['spectral_centralwavelength'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'spectral_centralwavelength')
+  .field
+    %label Spectral.Notes:
+    = text_area_tag 'avm_image[pending_avm_data][spectral_notes][]', avm_data['spectral_notes'].try(:first), :class => 'string medium'
+  .field
+    %label Temporal.StartTime:
+    = text_field_tag 'avm_image[pending_avm_data][temporal_starttime][]', avm_data['temporal_starttime'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'temporal_starttime')
+  .field
+    %label Temporal.IntegrationTime:
+    = text_field_tag 'avm_image[pending_avm_data][temporal_integrationtime][]', avm_data['temporal_integrationtime'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'temporal_integrationtime')
+  .field
+    %label DatasetID:
+    = text_field_tag 'avm_image[pending_avm_data][datasetid][]', avm_data['datasetid'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'datasetid')

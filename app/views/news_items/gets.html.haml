@@ -1,27 +1,21 @@
-#main.grid_12
-  #navigation.grid_3
-    = render :partial => "layouts/top_level_navigation", :locals => {:page => Page.where(:name => "Home Page").first}
-  #content.grid_9
+- @resources.each do |resource|
+  .content-listing.grid_12
+    .listing-icon
+      = image_tag resource.image(:thumb)
     %h1
-      = @resource.name
-    .news-page
-      = raw @resource.body
-    - @ipac_news.each do |news|
-      .info-bubble
-        %h5
-          = link_to news.name, news
-        .thumbnail-image-container
-          = link_to (image_tag news.image.url(:thumb)), news
-        %p.date
-          = news.release_date.strftime("%A, %B #{news.release_date.day.ordinalize}, %Y")
-        %p
-          %span.category
-            = news.news_categories.first.name
-          %span.bullet
-            &bull;
-          %span.id
-            = news.catalog_id
-        %p.abstract
-          = news.abstract.slice!(0..259)
-          = link_to "More ...", news
+      = link_to resource.name, "/news/#{resource.id}"
+    %p.posting-details
+      %span.posting-category
+        = resource.news_categories.first.try(:name)
+      %span.middle-dot
+        &bull;
+      %span.posting-id
+        = resource.catalog_id
+      %span.middle-dot
+        &bull;
+      %span.posting-date
+        = resource.release_date.strftime("%A, %B #{resource.release_date.day.ordinalize}, %Y")
+    %p
+      = resource.abstract
     .clear
+= render :partial => "layouts/paginate" 

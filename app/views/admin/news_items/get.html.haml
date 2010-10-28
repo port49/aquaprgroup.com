@@ -31,8 +31,11 @@
       = f.text_area :abstract, :class => 'medium'
     .field
       %label News Categories:
-      = select_tag 'news_categories[]', options_for_select(NewsCategory.all.collect{|nc| [nc.name, nc.id]}, @resource.pending_news_categories.collect(&:id) ), :multiple => true, :class => 'ui-corner-all container'
+      = select_tag 'news_categories[]', options_for_select(NewsCategory.unscoped.all.collect{|nc| [nc.name, nc.id]}, @resource.pending_news_categories.collect(&:id) ), :multiple => true, :class => 'ui-corner-all'
     .field
+      %label Packages:
+      = select_tag 'packages[]', options_for_select(Package.unscoped.all.collect{|p| [p.name, p.id]}, @resource.pending_packages.collect(&:id) ), :multiple => true, :class => 'ui-corner-all'
+    .field.thumbnail
       %label Image:
       - unless @resource.image_file_size.nil?
         = image_tag @resource.image.url(:thumb), :style => 'overflow:hidden'
@@ -40,8 +43,10 @@
         .thumbnail-placeholder
           &nbsp;
       = f.file_field :image
-      <br>Image Caption:<br>
-      = f.text_area :image_caption, :class => 'image_caption'
+      %br
+      Image Caption:
+      %br
+      = f.text_area :image_caption, :class => 'caption'
       .clear
     .field
       = f.text_area :body, :class => 'wymeditor'

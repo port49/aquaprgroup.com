@@ -1,0 +1,60 @@
+.grid_16.ui-accordion-header.ui-state-default
+  %h3.ui-helper-reset
+    Package:
+    = @resource.name
+.clear
+- unless @resource.new_record?
+  .grid_16.ui-widget-header.ui-border-sides.ui-button-bar
+    .float-left
+      = link_to 'Delete...', admin_singular_path(@resource), :confirm => "Are you sure you want to delete #{@resource.name}?", :method => :delete, :class => 'ui-button icon-destroy'
+  .clear
+.grid_16.ui-widget-content.ui-corner-bottom
+  = form_for(@resource, :url => admin_singular_path(@resource)) do |f|
+    .field
+      %label Name:
+      = f.text_field :name, :class => 'string'
+    .field
+      %label Items:
+      .panel
+        .field
+          %label Add Avm Image:
+          = text_field_tag 'links_title', '', :class => 'string'
+          %label &nbsp;
+          %ul.select-box
+            - AvmImage.unscoped.all.each do |item|
+              %li{:onclick => "Rickets.insertContainedItem('ul#items', this);", :itemid => item.id, :itemtype => item.class.table_name}
+                = item.name
+        .field
+          %label Add Video:
+          = text_field_tag 'links_title', '', :class => 'string'
+          %label &nbsp;
+          %ul.select-box
+            - Video.unscoped.all.each do |item|
+              %li{:onclick => "Rickets.insertContainedItem('ul#items', this);", :itemid => item.id, :itemtype => item.class.table_name}
+                = item.name
+        .field
+          %label Add News Item:
+          = text_field_tag 'links_title', '', :class => 'string'
+          %label &nbsp;
+          %ul.select-box
+            - NewsItem.unscoped.all.each do |item|
+              %li{:onclick => "Rickets.insertContainedItem('ul#items', this);", :itemid => item.id, :itemtype => item.class.table_name}
+                = item.name
+        .clear
+        %ul#items.sortable
+          - @resource.pending_items.each do |item|
+            %li.ui-corner.full
+              %div
+                - unless item.image_file_size.nil?
+                  = image_tag item.image.url(:icon)
+                %em
+                  = "(#{item.class.name})"
+                = item.name
+                = hidden_field_tag 'contained_items[]', "#{item.id}.#{item.class.table_name}"
+                %button.small-inline.ui-corner-all{:type => 'button', :onclick => '$(this.parentNode.parentNode).remove()'} x
+        :javascript
+          $('ul.sortable').sortable();
+    .clear
+    .field
+      = f.text_area :body, :class => 'wymeditor'
+    = render 'admin/extish_rickets/footer', :resource => @resource

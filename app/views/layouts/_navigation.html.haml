@@ -1,0 +1,88 @@
+.header.container_12
+  %span.page-title
+    Herschel Space Observatory
+  %br
+  %span.page-title-tag
+    An ESA mission with participation from NASA
+  %ul.sites-navigation
+    %li
+      = link_to "For Public", "/", :class => "selected"
+      |
+    %li
+      = link_to "For Researchers", "https://nhscsci.ipac.caltech.edu/"
+      |
+    %li
+      = link_to "ESA Herschel Home", "http://sci.esa.int/herschel"
+  %ul.mission-navigation
+    %li
+      = link_to "News", "/news", :class => (@page.try(:name) == "News Page" ? 'selected' : '')
+      |
+    %li
+      = link_to "Images", "/images", :class => (@page.try(:name) == "Image Page" ? 'selected' : '')
+      |
+    %li
+      = link_to "Videos", "/videos", :class => (@page.try(:name) == "Video Page" ? 'selected' : '')
+      |
+    %li
+      = link_to "About the Mission", Page.where(:name => "Overview").first, :class => (@page.try(:name) == "About the Mission" || @page.try(:parent).try(:name) == "About the Mission"  || @page.try(:parent).try(:parent).try(:name) == "About the Mission"  ? 'selected' : '')
+  %ul.mission-sub-navigation
+    - if @page.try(:name) == "News Page" || @page.try(:name) == "Media Information"
+      %li
+        = image_tag('icon-rss.png', :title => "Subscribe to News")
+        = link_to "All", "/news", :class => (@news_category ? '' : 'selected')
+        |
+      - NewsCategory.all.each do |category|
+        %li
+          = link_to category.name, category, :class => (@news_category == category ? 'selected' : '')
+          |
+      %li
+        = link_to "Media Information", Page.where(:name => "Media Information").first, :class => (@page.name == "Media Information" ? 'selected' : '')
+    - if @page.try(:name) == "Image Page"
+      %li
+        = image_tag('icon-rss.png', :title => "Subscribe to News")
+        = link_to "All", "/images", :class => (@avm_category ? '' : 'selected')
+        |
+      - @avm_categories.each do |category|
+        %li
+          = link_to category, "?avm_category=" + category, :class => (@avm_category == category ? 'selected' : '')
+          - unless category == @avm_categories.last
+            |
+    - if @page.try(:name) == "Video Page"
+      %li
+        = image_tag('icon-rss.png', :title => "Subscribe to Videos")
+        = link_to "All", "/videos", :class => (@video_category ? '' : 'selected')
+        |
+      - VideoCategory.all.each do |category|
+        %li
+          = link_to category.name, category, :class => (@video_category == category ? 'selected' : '')
+          - unless category == VideoCategory.all.last
+            |
+    - if @page.try(:parent).try(:name) == "About the Mission"
+      - @page.parent.children.each do |child|
+        %li
+          - if child.name == "Science"
+            = link_to child.name, Page.where(:name => "Mission Objectives").first, :class => (@page.name == child.name ? 'selected' : '')
+            |
+          - else 
+            = link_to child.name, "/about/#{child.id}", :class => (@page.name == child.name ? 'selected' : '')
+            |
+    - if @page.try(:parent).try(:parent).try(:name) == "About the Mission"
+      - @page.parent.parent.children.each do |child|
+        %li
+          - if child.name == "Science"
+            = link_to child.name, Page.where(:name => "Mission Objectives").first, :class => (@page.name == child.name || @page.parent.name == child.name ? 'selected' : '')
+            |
+          - else 
+            = link_to child.name, "/about/#{child.id}", :class => (@page.name == child.name || @page.parent.name == child.name ? 'selected' : '')
+            |
+  %ul.sub-category-navigation
+    - if @page.try(:name) == "Science"
+      - @page.children.each do |child|
+        %li
+          = link_to child.name, "/about/#{child.id}", :class => (@page.name == child.name ? 'selected' : '')
+          |
+    - if @page.try(:parent).try(:name) == "Science"
+      - @page.parent.children.each do |child|
+        %li
+          = link_to child.name, "/about/#{child.id}", :class => (@page.name == child.name ? 'selected' : '')
+          |

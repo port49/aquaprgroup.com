@@ -4,6 +4,7 @@ class NewsItem < ActiveRecord::Base
   include Containable
   
   contained_by :news_categories
+  contained_by :packages
 
   has_attached_file :image, :styles => {
     :icon   => "21x21#",

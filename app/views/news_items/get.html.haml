@@ -1,26 +1,22 @@
-#main.grid_12
-  #navigation.grid_3
-    = render :partial => "layouts/top_level_navigation", :locals => {:page => Page.where(:name => "Home Page").first}
-  #content.grid_9
-    .news-page
-      %h1
-        = @news.name
-      .medium-image-container
-        = image_tag @news.image.url(:medium)
-        %p
-          = @news.image_caption
-      %p.details
-        %span.date
-          = @news.release_date.strftime("%A, %B #{@news.release_date.day.ordinalize}, %Y")          
-        %span.bullet
-          &bull;
-        %span.category
-          = @news.news_categories.first.name
-        %span.bullet
-          &bull;
-        %span.id
-          = @news.catalog_id
-      = raw @news.body
-      /
-        = @news.inspect
-      
+.news-item.grid_12
+  %h1
+    = @resource.name
+  %p.posting-details
+    %span.posting-category
+      = @resource.news_categories.first.name
+    %span.middle-dot
+      &bull;
+    %span.posting-id
+      = @resource.catalog_id
+    %span.middle-dot
+      &bull;
+    %span.posting-date
+      = @resource.release_date.strftime("%A, %B #{@resource.release_date.day.ordinalize}, %Y")
+  .news-images
+    .inline-image
+      .inline-frame
+        = image_tag @resource.image(:medium)
+        %h1 <a href="LinkToImagePage">Title of Image</a>
+        %h3 Credit
+  =raw @resource.body
+  .clear

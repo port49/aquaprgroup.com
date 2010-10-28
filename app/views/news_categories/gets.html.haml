@@ -1,0 +1,20 @@
+- @news_items.each do |news_item|
+  .content-listing.grid_12
+    .listing-icon
+      = image_tag news_item.image(:thumb)
+    %h1
+      = link_to news_item.name, "/news/#{news_item.id}"
+    %p.posting-details
+      %span.posting-category
+        = news_item.news_categories.first.name
+      %span.middle-dot
+        &bull;
+      %span.posting-id
+        = news_item.catalog_id
+      %span.middle-dot
+        &bull;
+      %span.posting-date
+        = news_item.release_date.strftime("%A, %B #{news_item.release_date.day.ordinalize}, %Y")
+    %p
+      = news_item.abstract
+    .clear

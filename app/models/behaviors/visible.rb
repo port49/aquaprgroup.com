@@ -4,10 +4,9 @@ module Visible
   def self.included(klass)
     klass.extend ClassMethods
 
-    klass.send(:default_scope, klass.where(["visible=? OR visible=?", true, false]))
-    klass.scope :include_invisible, klass.where(["visible=? OR visible=?", true, false])
-    klass.scope :visible, klass.where(:visible => true)
-    klass.scope :invisible, klass.where(:visible => false)
+    klass.send  :default_scope,     klass.where(:visible => true)
+    klass.scope :visible,           klass.where(:visible => true)
+    klass.scope :invisible,         klass.where(:visible => false)
   end
   
   #

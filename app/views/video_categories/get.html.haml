@@ -1,0 +1,20 @@
+- @video_items.each do |video_item|
+  .content-listing.grid_12
+    .listing-icon
+      = image_tag video_item.image(:thumb)
+    %h1
+      = link_to video_item.name, "/news/#{video_item.id}"
+    %p.posting-details
+      %span.posting-category
+        = video_item.video_categories.first.name
+      %span.middle-dot
+        &bull;
+      %span.posting-id
+        = video_item.catalog_id
+      %span.middle-dot
+        &bull;
+      %span.posting-date
+        = video_item.release_date.strftime("%A, %B #{video_item.release_date.day.ordinalize}, %Y")
+    %p
+      = video_item.abstract
+    .clear

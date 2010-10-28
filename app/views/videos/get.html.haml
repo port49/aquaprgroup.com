@@ -1,0 +1,22 @@
+.news-item.grid_12
+  %h1
+    = @resource.name
+  %p.posting-details
+    %span.posting-category
+      = @resource.video_categories.first.name
+    %span.middle-dot
+      &bull;
+    %span.posting-id
+      = @resource.catalog_id
+    %span.middle-dot
+      &bull;
+    %span.posting-date
+      = @resource.release_date.strftime("%A, %B #{@resource.release_date.day.ordinalize}, %Y")
+  .video-player
+    %div#fms.player{:href => @resource.embed, :style => "background-image:url(#{@resource.image.url})"}
+      = image_tag "http://www.herschel.caltech.edu/template/PlayButton.png", :class => "play-button"
+    :javascript
+      flowplayer("fms", "/flash/flowplayer-3.2.4.swf", {clip: {provider: 'rtmp'},plugins: {rtmp: {url: "/flash/flowplayer.rtmp-3.2.3.swf",netConnectionUrl: "rtmp://mrisgstream01.ipac.caltech.edu/vod"}} });   
+  =raw @resource.body
+  = # raise @resource.secondary_files.inspect
+  .clear

@@ -2,8 +2,8 @@ class Admin::NewsCategoriesController < Admin::ExtishController
 
 protected
   def after_update
-    @news_items = NewsItem.find(params[:news_items]) rescue []
-    @resource.set_pending_news_items @news_items
+    @items = NewsItem.unscoped.find(params[:contained_items]) rescue []
+    @resource.set_pending_news_items @items
   end
 
   def parse_search

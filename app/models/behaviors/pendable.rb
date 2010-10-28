@@ -12,9 +12,9 @@ module Pendable
   # Class Methods.
   #
   module ClassMethods
-    def create(attributes = nil, &block)
+    def create(attrs = nil, &block)
       new_record = super
-      new_record.update_pending(attributes)
+      new_record.update_pending(attrs)
       new_record
     end
   end

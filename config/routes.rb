@@ -14,7 +14,6 @@ IpacCaltechEdu::Application.routes.draw do |map|
     map_restfully :page
     map_restfully :news_item
     map_restfully :news_category
-    map_restfully :widget
     map_restfully :media_file
     map_restfully :wymeditor_media_file
   end

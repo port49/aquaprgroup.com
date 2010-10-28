@@ -1,0 +1,30 @@
+!!! Strict
+
+%html
+  %head
+    %meta{"http-equiv".to_sym => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title
+      Herschel Space Observatory
+    = stylesheet_link_tag 'reset'
+    = stylesheet_link_tag 'text'
+    = stylesheet_link_tag '960'
+    = stylesheet_link_tag 'main'
+    = javascript_include_tag 'flowplayer-3.2.4.min'
+    = csrf_meta_tag
+  %body
+    .container.container_12
+      = render 'layouts/navigation'
+      #content.container_12
+        %p.site-blurb NASA Herschel Science Center's Portal to the Cool Universe
+        = yield
+        .clear
+    .privacy-policy.container_12
+      %p
+        = link_to "Privacy Policy", Page.where(:name => "Privacy Policy").first
+    .mission-logos
+      = link_to  (image_tag "esa.png", :title => "European Space Agency", :alt => "European Space Agency"), "http://www.esa.int"
+      = link_to  (image_tag "nasa.png", :title => "National Aeronautics and Space Administration", :alt => "National Aeronautics and Space Administration"), "http://www.nasa.gov"
+      = link_to  (image_tag "jpl.png", :title => "Jet Propulsion Laboratory", :alt => "Jet Propulsion Laboratory"), "http://jpl.nasa.gov"
+      = link_to  (image_tag "caltech.png", :title => "California Institue of Technology", :alt => "California Institue of Technology"), "http://www.caltech.edu"
+      = link_to  (image_tag "ipac.png", :title => "Infrared Processing and Analysis Center", :alt => "Infrared Processing and Analysis Center"), "http://www.ipac.caltech.edu"
+      = link_to  (image_tag "nhsc.png", :title => "NASA Herschel Science Center", :alt => "NASA Herschel Science Center"), "https://nhscsci.ipac.caltech.edu/"

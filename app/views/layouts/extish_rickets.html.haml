@@ -5,6 +5,8 @@
     Extish Title
   = javascript_include_tag '../jquery-ui/js/jquery-1.4.2.min'
   = javascript_include_tag '../jquery-ui/js/jquery-ui-1.8.1.custom.min'
+  = javascript_include_tag 'jquery-drop-panel'
+  = javascript_include_tag 'jquery-clonable-input'
   = javascript_include_tag 'rails'
   = javascript_include_tag "rickets"
   = javascript_include_tag '../wymeditor/jquery.wymeditor.pack.js'
@@ -17,16 +19,20 @@
 
 :javascript
   $(function(){
-    $( '.wymeditor' ).wymeditor({
+    $('.wymeditor').wymeditor({
       postInit: function(wym){
-        $( '.wym_area_bottom' ).hide();
-        $( '.wym_iframe' ).find( 'iframe' ).css('height', '57.3em');
+        $('.wym_area_bottom').hide();
+        $('.wym_iframe iframe').css('height', '57.3em');
+        $('.wymeditor-short .wym_iframe iframe').css('height', '17.3em');
       },
       classesHtml: '',
       containersHtml: '',
       dialogImageHtml: '<body onload=\'document.location="/admin/wymeditor_media_files/' + WYMeditor.INDEX + '"\'></body>'
    });
    $('.datepicker').datepicker({dateFormat:'yy-mm-dd'});
+   $('.drop-panel').dropPanel();
+   $('input.plus').clonableInput();
+   $('input.minus').declonableInput();
   });
 
 %body

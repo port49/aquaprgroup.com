@@ -1,0 +1,22 @@
+- @resources.each do |resource|
+  .content-listing.grid_12
+    .listing-icon
+      = image_tag resource.image(:thumb)
+    %h1
+      = link_to resource.name, avm_image_path(resource)
+    %p.posting-details
+      %span.posting-category
+        = resource.avm_data['type']
+      %span.middle-dot
+        &bull;
+      %span.posting-id
+        = resource.catalog_id
+      %span.middle-dot
+        &bull;
+      %span.posting-date
+        - if resource.release_date
+          = resource.release_date.strftime("%A, %B #{resource.release_date.try(:day).try(:ordinalize)}, %Y")
+    %p
+      = resource.abstract
+    .clear
+= render :partial => "layouts/paginate" 

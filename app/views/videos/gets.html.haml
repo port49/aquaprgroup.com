@@ -1,0 +1,21 @@
+- @resources.each do |resource|
+  .content-listing.grid_12
+    .listing-icon
+      = image_tag resource.image(:thumb)
+    %h1
+      = link_to resource.name, "/video/#{resource.id}"
+    %p.posting-details
+      %span.posting-category
+        = resource.video_categories.first.name
+      %span.middle-dot
+        &bull;
+      %span.posting-id
+        = resource.catalog_id
+      %span.middle-dot
+        &bull;
+      %span.posting-date
+        = resource.release_date.strftime("%A, %B #{resource.release_date.day.ordinalize}, %Y")
+    %p
+      = resource.abstract
+    .clear
+= render :partial => "layouts/paginate" 

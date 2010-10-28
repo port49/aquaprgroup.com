@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def get
-    @gallery_resources = MrssFeed.by_category(/Observation|Artwork/).collect(&:images).flatten.sort{|a,b| b.date <=> a.date}[0,4]
+    @page = Page.find(params[:id])
   end
 
 protected

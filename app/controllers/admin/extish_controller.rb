@@ -53,9 +53,8 @@ class Admin::ExtishController < ApplicationController
 protected
 
   def prepare_restful_resource
-    super
+    super(true)
     @resource.load_pending if @resource && @resource.respond_to?(:load_pending)
-    @resources = @resources.include_invisible if @resources.respond_to?(:visible)
     @resources.each(&:load_pending) if @resources && @resources.first.respond_to?(:load_pending)
     @new_resource = resource_class.new(:id => 0)
   end
@@ -64,7 +63,7 @@ protected
   def parse_search
     return false unless params[:search]
     @conditions ||= []
-    %w( name ).each do |column|
+    %w(name).each do |column|
       @conditions << ActiveRecord::Base.send( :sanitize_sql_array, [ "LOWER(#{ column }) LIKE ?", "%%#{ params[:search] || "" }%%" ] )
     end
   end

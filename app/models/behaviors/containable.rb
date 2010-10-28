@@ -16,7 +16,7 @@ module Containable
 
       # pending containments
       define_method("pending_#{item_names}".to_sym, lambda{
-        item_class.joins("INNER JOIN containers ON containers.item_id=#{item_names}.id").where(["containers.item_type=? AND containers.container_id=? AND containers.container_type=? AND containers.pending=?", item_class.name, self.id, self.class.name, true])
+        item_class.unscoped.joins("INNER JOIN containers ON containers.item_id=#{item_names}.id").where(["containers.item_type=? AND containers.container_id=? AND containers.container_type=? AND containers.pending=?", item_class.name, self.id, self.class.name, true])
       })
 
       define_method("append_pending_#{item_name}".to_sym, lambda{|item|

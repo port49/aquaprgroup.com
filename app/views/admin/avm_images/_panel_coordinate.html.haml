@@ -1,0 +1,42 @@
+#avm-coordinate.field{:style => 'display:none'}
+  .field
+    %label Spatial.CoordinateFrame:
+    - select_avm_spatial_coordinate_frame_options = %w(undefined ICRS FK5 FK4 ECL GAL SGAL)
+    = select_tag 'avm_image[pending_avm_data][spatial_coordinateframe]', options_for_select(select_avm_spatial_coordinate_frame_options.collect{|v| [v, v]}, avm_data['spatial_coordinateframe']), :class => 'string'
+  .field
+    %label Spatial.Equinox:
+    - select_avm_spatial_equinox_options = %w(undefined J2000 B1950)
+    = select_tag 'avm_image[pending_avm_data][spatial_equinox]', options_for_select(select_avm_spatial_equinox_options.collect{|v| [v, v]}, avm_data['spatial_equinox']), :class => 'string'
+  .field
+    %label Spatial.ReferenceValue:
+    = text_field_tag 'avm_image[pending_avm_data][spatial_referencevalue][]', avm_data['spatial_referencevalue'].try(:first), :class => 'string'
+  = plus_or_minus_fields(avm_data, 'spatial_referencevalue')
+  .field
+    %label Spatial.ReferenceDimension:
+    = text_field_tag 'avm_image[pending_avm_data][spatial_referencedimension][]', avm_data['spatial_referencedimension'].try(:first), :class => 'string'
+  = plus_or_minus_fields(avm_data, 'spatial_referencedimension')
+  .field
+    %label Spatial.ReferencePixel:
+    = text_field_tag 'avm_image[pending_avm_data][spatial_referencepixel][]', avm_data['spatial_referencepixel'].try(:first), :class => 'string'
+  = plus_or_minus_fields(avm_data, 'spatial_referencepixel')
+  .field
+    %label Spatial.Scale:
+    = text_field_tag 'avm_image[pending_avm_data][spatial_scale][]', avm_data['spatial_scale'].try(:first), :class => 'string'
+  = plus_or_minus_fields(avm_data, 'spatial_scale')
+  .field
+    %label Spatial.Rotation:
+    = text_field_tag 'avm_image[pending_avm_data][spatial_rotation]', avm_data['spatial_rotation'], :class => 'string'
+  .field
+    %label Spatial.CoordsystemProjection:
+    - select_avm_spatial_coordsystem_projection_options = %w(undefined TAN SIN ARC AIT CAR)
+    = select_tag 'avm_image[pending_avm_data][spatial_coordsystemprojection]', options_for_select(select_avm_spatial_coordsystem_projection_options.collect{|v| [v, v]}, avm_data['spatial_coordsystemprojection']), :class => 'string'
+  .field
+    %label Spatial.Quality:
+    - select_avm_spatial_quality_options = %w(undefined Full Position)
+    = select_tag 'avm_image[pending_avm_data][spatial_quality]', options_for_select(select_avm_spatial_quality_options.collect{|v| [v, v]}, avm_data['spatial_quality']), :class => 'string'
+  .field
+    %label Spatial.Notes:
+    = text_area_tag 'avm_image[pending_avm_data][spatial_notes]', avm_data['spatial_notes'], :class => 'string medium'
+  .field
+    %label Spatial.FITSheader:
+    = text_area_tag 'avm_image[pending_avm_data][spatial_fitsheader]', avm_data['spatial_fitsheader'], :class => 'string medium'

@@ -1,0 +1,23 @@
+#avm-publisher.field{:style => 'display:none'}
+  .field
+    %label Publisher:
+    = text_field_tag 'avm_image[pending_avm_data][publisher]', avm_data['publisher'], :class => 'string'
+  .field
+    %label PublisherID:
+    = text_field_tag 'avm_image[pending_avm_data][publisherid]', avm_data['publisherid'], :class => 'string'
+  .field
+    %label ResourceID:
+    = avm_data['resourceid']
+  .field
+    %label ResourceURL:
+    = avm_data['resourceurl']
+  .field
+    %label RelatedResources:
+    = text_field_tag 'avm_image[pending_avm_data][relatedresources][]', avm_data['relatedresources'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'relatedresources')
+  .field
+    %label MetadataDate:
+    = avm_data['metadatadate']
+  .field
+    %label MetadataVersion:
+    = text_field_tag 'avm_image[pending_avm_data][metadataversion]', avm_data['metadataversion'], :class => 'string'

@@ -1,0 +1,18 @@
+.video-item.grid_12
+  %h1
+    = @resource.name
+  %p.posting-details
+    %span.posting-category
+      = @resource.avm_data['type']
+    %span.middle-dot
+      &bull;
+    %span.posting-id
+      = @resource.catalog_id
+    %span.middle-dot
+      &bull;
+    %span.posting-date
+      = @resource.release_date.strftime("%A, %B #{@resource.release_date.day.ordinalize}, %Y")
+  .avm-image
+    = image_tag @resource.image.url
+  =raw @resource.body
+  .clear

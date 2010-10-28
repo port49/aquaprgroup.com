@@ -1,0 +1,45 @@
+#avm-content.field{:style => 'display:none'}
+  .field
+    %label Title:
+    = text_field_tag 'avm_image[pending_avm_data][title]', avm_data['title'], :class => 'string'
+  .field
+    %label Headline:
+    = text_area_tag 'avm_image[pending_avm_data][headline]', avm_data['headline'], :class => 'string medium'
+  .field
+    %label Description:
+    = text_area_tag 'avm_image[pending_avm_data][description]', avm_data['description'], :class => 'string tall'
+  .field
+    %label Subject.Category:
+    = text_field_tag 'avm_image[pending_avm_data][subject_category][]', avm_data['subject_category'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'subject_category')
+  .field
+    %label Subject.Name:
+    = text_field_tag 'avm_image[pending_avm_data][subject_name][]', avm_data['subject_name'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'subject_name')
+  .field
+    %label Distance:
+    = text_field_tag 'avm_image[pending_avm_data][distance][]', avm_data['distance'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'distance')
+  .field
+    %label Distance.Notes:
+    = text_field_tag 'avm_image[pending_avm_data][distance_notes]', avm_data['distance_notes'], :class => 'string'
+  .field
+    %label ReferenceURL:
+    = text_field_tag 'avm_image[pending_avm_data][referenceurl]', avm_data['referenceurl'], :class => 'string'
+  .field
+    %label Credit:
+    = text_area_tag 'avm_image[pending_avm_data][credit]', avm_data['credit'], :class => 'string medium'
+  .field
+    %label Date:
+    = (avm_data['date'] && avm_data['date'].length > 0) ? avm_data['date'] : raw("&nbsp;")
+  .field
+    %label ID:
+    = text_field_tag 'avm_image[pending_avm_data][id]', avm_data['id'], :class => 'string'
+  .field
+    %label Type:
+    - select_avm_type_options = %w(Artwork Observation Photograph Simulation Planetary Collage Chart)
+    = select_tag 'avm_image[pending_avm_data][type]', options_for_select(select_avm_type_options.collect{|v| [v, v]}, avm_data['type']), :class => 'string'
+  .field
+    %label Image.ProductQuality:
+    - select_avm_image_product_quality_options = %w(undefined Good Moderate Poor)
+    = select_tag 'avm_image[pending_avm_data][image_productquality]', options_for_select(select_avm_image_product_quality_options.collect{|v| [v, v]}, avm_data['image_productquality']), :class => 'string'

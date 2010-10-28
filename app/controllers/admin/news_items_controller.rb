@@ -1,10 +1,11 @@
 class Admin::NewsItemsController < Admin::ExtishController
 
 protected
-
   def after_update
     @news_categories = NewsCategory.find(params[:news_categories]) rescue []
     @resource.set_pending_news_categories @news_categories
+    @packages = Package.find(params[:packages]) rescue []
+    @resource.set_pending_packages @packages
   end
 
   def parse_search

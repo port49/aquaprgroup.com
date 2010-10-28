@@ -26,19 +26,27 @@ class ApplicationController < ActionController::Base
 
 protected
 
-  def prepare_restful_resource
+  def prepare_restful_resource(unscoped = false)
     if self.respond_to? :resource_class
       # plural
       if %w(gets posts puts deletes).include? self.action_name
         parse_search
         parse_sort_order
-        @resources = resource_class.where(@conditions).order(@order).paginate :page => params[:page], :per_page => per_page
+        if unscoped
+          @resources = resource_class.unscoped.where(@conditions).order(@order).paginate :page => params[:page], :per_page => per_page
+        else
+          @resources = resource_class.where(@conditions).order(@order).paginate :page => params[:page], :per_page => per_page
+        end
       # singular
       elsif %w(get post put delete).include? self.action_name
         if params[:id].to_i == 0
           @resource = resource_class.new
         else
-          @resource = resource_class.find(params[:id]) if params[:id]
+          if unscoped
+            @resource = resource_class.unscoped.find(params[:id]) if params[:id]
+          else
+            @resource = resource_class.find(params[:id]) if params[:id]
+          end
         end
       end
     end

@@ -22,7 +22,7 @@
           = text_field_tag 'links_title', '', :class => 'string'
           %label &nbsp;
           %ul.select-box
-            - NewsItem.all.each do |item|
+            - NewsItem.unscoped.all.each do |item|
               %li{:onclick => "Rickets.insertContainedItem('ul#news-items', this);", :itemid => item.id, :itemtype => item.class.table_name}
                 = item.name
         .clear
@@ -31,7 +31,7 @@
             %li.ui-corner.full
               %div
                 = item.name
-                = hidden_field_tag 'news_items[]', item.id
+                = hidden_field_tag 'contained_items[]', item.id
                 %button.small-inline.ui-corner-all{:type => 'button', :onclick => '$(this.parentNode.parentNode).remove()'} x
         :javascript
           $('ul.sortable').sortable();

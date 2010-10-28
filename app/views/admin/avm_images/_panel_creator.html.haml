@@ -1,0 +1,35 @@
+#avm-creator.field{:style => 'display:none'}
+  .field
+    %label Creator:
+    = text_field_tag 'avm_image[pending_avm_data][creator]', avm_data['creator'], :class => 'string'
+  .field
+    %label CreatorURL:
+    = text_field_tag 'avm_image[pending_avm_data][creatorurl]', avm_data['creatorurl'], :class => 'string'
+  .field
+    %label Contact.Name:
+    = text_field_tag 'avm_image[pending_avm_data][contact_name][]', avm_data['contact_name'].try(:first), :class => 'string plus'
+  = plus_or_minus_fields(avm_data, 'contact_name')
+  .field
+    %label Contact.Email:
+    = text_field_tag 'avm_image[pending_avm_data][contact_email]', avm_data['contact_email'], :class => 'string'
+  .field
+    %label Contact.Telephone:
+    = text_field_tag 'avm_image[pending_avm_data][contact_telephone]', avm_data['contact_telephone'], :class => 'string'
+  .field
+    %label Contact.Address:
+    = text_field_tag 'avm_image[pending_avm_data][contact_address]', avm_data['contact_address'], :class => 'string'
+  .field
+    %label Contact.City:
+    = text_field_tag 'avm_image[pending_avm_data][contact_city]', avm_data['contact_city'], :class => 'string'
+  .field
+    %label Contact.StateProvince:
+    = text_field_tag 'avm_image[pending_avm_data][contact_stateprovince]', avm_data['contact_stateprovince'], :class => 'string'
+  .field
+    %label Contact.PostalCode:
+    = text_field_tag 'avm_image[pending_avm_data][contact_postalcode]', avm_data['contact_postalcode'], :class => 'string'
+  .field
+    %label Contact.Country:
+    = text_field_tag 'avm_image[pending_avm_data][contact_country]', avm_data['contact_country'], :class => 'string'
+  .field
+    %label Rights:
+    = text_field_tag 'avm_image[pending_avm_data][rights]', avm_data['rights'], :class => 'string'

@@ -2,7 +2,7 @@ class Page < ActiveRecord::Base
   include Pendable
 
   belongs_to :parent, :class_name => 'Page'
-  has_many :children, :class_name => 'Page', :foreign_key => 'parent_id', :conditions => "parent_id!=id", :order => 'name ASC'
+  has_many :children, :class_name => 'Page', :foreign_key => 'parent_id', :conditions => "parent_id!=id", :order => 'position ASC'
 
   serialize :links, Array
 
@@ -23,5 +23,5 @@ class Page < ActiveRecord::Base
     end
     return select
   end
-
+  
 end

@@ -1,0 +1,92 @@
+.grid_16.ui-accordion-header.ui-state-default
+  %h3.ui-helper-reset
+    = link_to 'Videos', admin_videos_path
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    = link_to 'Video Categories', admin_video_categories_path
+.clear
+- unless @resource.new_record?
+  .grid_16.ui-widget-header.ui-border-sides.ui-button-bar
+    .float-left
+      = link_to 'Delete...', admin_singular_path(@resource), :confirm => "Are you sure you want to delete #{@resource.name}?", :method => :delete, :class => 'ui-button icon-destroy'
+  .clear
+.grid_16.ui-widget-content.ui-corner-bottom
+  = form_for(@resource, :url => admin_singular_path(@resource), :html => {:multipart => true}) do |f|
+    .field
+      %label ID:
+      = f.text_field :catalog_id, :class => 'string'
+    .field
+      %label Name:
+      = f.text_field :name, :class => 'string'
+    .field
+      %label Release Date:
+      = f.text_field :release_date, :class => 'datepicker'
+    .field
+      %label Visible:
+      = f.check_box :visible
+    .field
+      %label Keywords:
+      = f.text_field :keywords, :class => 'string'
+    .field
+      %label Abstract:
+      = f.text_area :abstract, :class => 'medium'
+    .field
+      %label Youtube:
+      = f.text_field :youtube, :class => 'string'
+    .field
+      %label Video Source:
+      = f.text_field :embed, :class => 'string'
+    .field
+      %label Video Categories:
+      = select_tag 'video_categories[]', options_for_select(VideoCategory.unscoped.all.collect{|c| [c.name, c.id]}, @resource.pending_video_categories.collect(&:id) ), :multiple => true, :class => 'ui-corner-all'
+    .field
+      %label Packages:
+      = select_tag 'packages[]', options_for_select(Package.unscoped.all.collect{|p| [p.name, p.id]}, @resource.pending_packages.collect(&:id) ), :multiple => true, :class => 'ui-corner-all'
+    .field.thumbnail
+      %label Image:
+      - unless @resource.image_file_size.nil?
+        = image_tag @resource.image.url(:thumb), :style => 'overflow:hidden'
+      - else
+        .thumbnail-placeholder
+          &nbsp;
+      = f.file_field :image
+      %br
+      .clear
+    .field
+      = f.text_area :body, :class => 'wymeditor'
+    .field
+      %label Secondary Files:
+      .panel
+        .field
+          %label File:
+          = file_field_tag 'secondary_files_binary'
+        .field
+          %label Quality:
+          - select_quality_options = ['Fullscreen', 'Widescreen', 'Broadcast', '3D Fullscreen', '3D Widescreen', '3D Broadcast', 'Audio']
+          = select_tag 'secondary_files_quality', options_for_select(select_quality_options.collect{|v| [v, v]}, 'Fullscreen'), :class => 'string'
+        .field
+          %label Width:
+          = text_field_tag 'secondary_files_width', '', :class => 'string'
+        .field
+          %label Height:
+          = text_field_tag 'secondary_files_height', '', :class => 'string'
+        .field
+          .float-right
+            .button-shell.ui-corner-all
+              %button.ui-corner-all{:type => 'button', :onclick => "Rickets.createSecondaryFileListItem($('ul#secondary-files'), 'video');return false;"}
+                Add
+        .clear
+        %ul#secondary-files.sortable
+          - if @resource.pending_secondary_files
+            - @resource.pending_secondary_files.each do |secondary_file|
+              %li{:secondary_file_id => secondary_file.id}
+                = secondary_file.binary_file_name
+                %em
+                  = secondary_file.quality
+                = "(#{secondary_file.display_width}x#{secondary_file.display_height})"
+                = secondary_file.binary_content_type
+                = number_to_human_size secondary_file.binary_file_size
+                %button.small-inline.ui-corner-all{:type => 'button', :onclick => "Rickets.removeSecondaryFileListItem($('ul#secondary-files'), this.parentNode);"} x
+        :javascript
+          $('ul.sortable').sortable();
+    .clear
+    = render 'admin/extish_rickets/footer', :resource => @resource

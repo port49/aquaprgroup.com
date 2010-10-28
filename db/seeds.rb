@@ -15,12 +15,9 @@ def create_page(name, parent)
   end
 end
 
+p = Page.create(:name => 'root', :parent_id => 1)
+
 root = Page.root
 create_page("root", root)
 create_page("Home Page", root)
-create_page("Feedback", root)
-create_page("Image Use Policy", root)
-create_page("Privacy Policy", root)
-create_page("News", root)
-create_page("Gallery", root)
 
