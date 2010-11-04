@@ -12,6 +12,7 @@ IpacCaltechEdu::Application.routes.draw do |map|
   match 'admin' => 'admin/pages#gets'
   namespace :admin do
     map_restfully :page
+    map_restfully :link
     map_restfully :news_item
     map_restfully :news_category
     map_restfully :media_file

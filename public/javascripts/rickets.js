@@ -15,7 +15,7 @@ var Rickets = {
   showRow: function( row ) {
     tr = $( row );
     if( tr.length == 1 ) {
-      Rickets.redirectNewWindow( tr.attr( 'id' ) );
+      Rickets.redirect( tr.attr( 'id' ) );
     }
   },
 

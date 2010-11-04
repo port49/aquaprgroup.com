@@ -8,7 +8,7 @@ class NewsItem < ActiveRecord::Base
 
   has_attached_file :image, :styles => {
     :icon   => "21x21#",
-    :thumb  => "155x155#",
+    :thumb  => "72x72#",
     :medium => "250x250#"
   }, :url => "/system/#{self.table_name}/:attachment/:id/:style/:filename"
 

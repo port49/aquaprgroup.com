@@ -20,8 +20,6 @@
         %th
           Icon
         %th
-          = rickets_header "catalog_id", "ID"
-        %th
           = rickets_header "name", "Name"
         %th
           Workflow
@@ -35,8 +33,6 @@
           %td
             - unless resource.image_file_size.nil?
               = image_tag resource.image.url(:icon)
-          %td
-            = resource.catalog_id
           %td
             = link_to h(resource.name), admin_singular_path(resource)
           %td

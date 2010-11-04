@@ -27,7 +27,7 @@ module ExtishRicketsHelper
   def ricket_tab(resource_class, options={})
     options[:name] ||= resource_class.name.pluralize
     options[:url] ||= self.send("admin_#{resource_class.table_name}_path", options[:params])
-    options[:selected] ||= params[:controller] == "admin_#{resource_class.table_name}"
+    options[:selected] ||= params[:controller] == "admin/#{resource_class.table_name}"
     raw("<li class='ui-state-default ui-corner-top ui-tab#{options[:selected] ? '-selected' : ''}'>#{link_to options[:name], options[:url]}</li>")
   end
 

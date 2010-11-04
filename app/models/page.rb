@@ -13,7 +13,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.home_page
-    self.where(:name => "Home Page").first
+    self.where(:name => "Home").first
   end
 
   def hierarchy_for_select(page = Page.root, tab = 0)

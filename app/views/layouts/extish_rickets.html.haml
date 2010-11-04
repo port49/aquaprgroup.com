@@ -47,6 +47,7 @@
       %ul.ui-tabs-nav.ui-helper-reset.ui-helper-clearfix
         =# ricket_tab Widget
         = ricket_tab Page, :params => {:sort_order => 'name:down'}
+        = ricket_tab Link, :name => 'Links', :params => {:sort_order => 'name:down'}
         = ricket_tab NewsItem, :name => 'News', :params => {:sort_order => 'name:down'}, :selected => ["admin/news_items","admin/news_categories"].include?(params[:controller])
         = ricket_tab MediaFile, :name => 'Media Files', :params => {:sort_order => 'name:down'}
         =# link_to "&nbsp;", user_session_path, :method => :delete, :class => 'close'
