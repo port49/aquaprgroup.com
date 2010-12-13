@@ -6,6 +6,8 @@ class NewsItem < ActiveRecord::Base
   contained_by :news_categories
   contained_by :packages
 
+  scope :latest, order('release_date DESC').limit(3)
+
   has_attached_file :image, :styles => {
     :icon   => "21x21#",
     :thumb  => "72x72#",

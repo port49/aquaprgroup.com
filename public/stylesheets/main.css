@@ -68,3 +68,22 @@ ul.top-nav a.selected {
   background-color: #00c0f3;
   color: white;
 }
+
+.splash-pane {
+  border: 1px solid #00c0f3;
+}
+.splash-pane .comment {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 40px;
+  color: white;
+  background-color: black;
+  filter: alpha(opacity=60);
+  opacity: 0.6;
+}
+.splash-pane .comment a {
+  padding: 0.5em;
+  color: white;
+}

@@ -1,22 +1,8 @@
-.news-item.grid_12
-  %h1
-    = @resource.name
-  %p.posting-details
-    %span.posting-category
-      = @resource.news_categories.first.name
-    %span.middle-dot
-      &bull;
-    %span.posting-id
-      = @resource.catalog_id
-    %span.middle-dot
-      &bull;
-    %span.posting-date
-      = @resource.release_date.strftime("%A, %B #{@resource.release_date.day.ordinalize}, %Y")
-  .news-images
-    .inline-image
-      .inline-frame
-        = image_tag @resource.image(:medium)
-        %h1 <a href="LinkToImagePage">Title of Image</a>
-        %h3 Credit
-  =raw @resource.body
-  .clear
+.container_12
+  .grid_12
+    %h1
+      = @resource.name
+    %p.posting-details
+      %span.posting-date
+        = @resource.release_date.strftime("%A, %B #{@resource.release_date.day.ordinalize}, %Y")
+    =raw @resource.body

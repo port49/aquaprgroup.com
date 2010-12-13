@@ -150,6 +150,14 @@ var Rickets = {
     var url = $('#links_url').val();
     $(ul).append('<li><a href=\''+url+'\' target=\'_blank\'>'+title+'</a><input name=\''+resource_name+'[links][][title]\' type=\'hidden\' value=\''+title+'\' /><input name=\''+resource_name+'[links][][url]\' type=\'hidden\' value=\''+url+'\' /><button class=\'small-inline ui-corner-all\' onclick=\'$(this.parentNode).remove()\' type=\'button\'>x</button></li>');
     $(ul).sortable();
+  },
+  
+  createVideoListItem: function(ul, resource_name){
+    var title = $('#videos_title').val();
+    var url = $('#videos_url').val();
+    var token = url.match(/youtube.com\/watch\?v=([^&.]+)/)[1];
+    $(ul).append('<li><object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/'+token+'?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/'+token+'?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object><input name=\''+resource_name+'[videos][][title]\' type=\'hidden\' value=\''+title+'\' /><input name=\''+resource_name+'[videos][][url]\' type=\'hidden\' value=\''+url+'\' /><button class=\'small-inline ui-corner-all\' onclick=\'$(this.parentNode).remove()\' type=\'button\'>x</button></li>');
+    $(ul).sortable();
   }
   
 }

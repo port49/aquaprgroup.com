@@ -5,6 +5,7 @@ class Page < ActiveRecord::Base
   has_many :children, :class_name => 'Page', :foreign_key => 'parent_id', :conditions => "parent_id!=id", :order => 'position ASC'
 
   serialize :links, Array
+  serialize :videos, Array
 
   validates_presence_of :parent_id
 

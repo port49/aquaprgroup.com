@@ -4,7 +4,7 @@
   %head
     %meta{"http-equiv".to_sym => "Content-Type", :content => "text/html; charset=utf-8"}
     %title
-      Aqua Public Relations Group
+      Aqua Communications, Portsmouth, NH
     = stylesheet_link_tag 'reset'
     = stylesheet_link_tag 'text'
     = stylesheet_link_tag 'grid'
@@ -23,38 +23,8 @@
             %li
               = link_to page.name.upcase, page_path(page), :class => "ui-state-default ui-corner-bottom#{@resource == page ? ' selected' : ''}"
     .container_12
-      = image_tag 'aquacommunications.png', :class => 'leaderboard'
-    .container_12
-      .grid_9
-        BIGIMAGEHERE
-      .grid_3.latest
-        %h3.ui-widget-header
-          LATEST
-        - Link.latest.each do |link|
-          .blurb
-            - unless link.image_file_size.nil?
-              = link_to image_tag(link.image.url(:thumb)), link.url
-            = link_to link.name, link.url
-            %span.date
-              = date_format link.created_at
-            = link.body
-    .clear.hr
-    .container_12
-      .grid_4
-        .feature
-          = link_to "Feature 1", '#'
-          %p
-            Copy, a small paragraph, regarding the feature.
-      .grid_4
-        .feature
-          = link_to "Feature 2", '#'
-          %p
-            Copy, a small paragraph, regarding the feature.
-      .grid_4
-        .feature
-          = link_to "Feature 3", '#'
-          %p
-            Copy, a small paragraph, regarding the feature.
+      = link_to image_tag('aquacommunications.png', :class => 'leaderboard'), root_path
+    = yield
     .clear.hr
     .container_12.footer
       %p

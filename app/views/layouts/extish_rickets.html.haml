@@ -6,10 +6,10 @@
   = javascript_include_tag '../jquery-ui/js/jquery-1.4.2.min'
   = javascript_include_tag '../jquery-ui/js/jquery-ui-1.8.1.custom.min'
   = javascript_include_tag 'jquery-drop-panel'
-  = javascript_include_tag 'jquery-clonable-input'
   = javascript_include_tag 'rails'
   = javascript_include_tag "rickets"
-  = javascript_include_tag '../wymeditor/jquery.wymeditor.pack.js'
+  = #javascript_include_tag '../wymeditor/jquery.wymeditor.js'
+  = javascript_include_tag '../wymeditor/jquery.wymeditor.js'
   = javascript_include_tag 'application'
   = stylesheet_link_tag 'reset'
   = stylesheet_link_tag 'text'
@@ -24,6 +24,24 @@
         $('.wym_area_bottom').hide();
         $('.wym_iframe iframe').css('height', '57.3em');
         $('.wymeditor-short .wym_iframe iframe').css('height', '17.3em');
+        // YouTube video button
+        var video_html = "<li class='wym_tools_newbutton'>"
+                       + "<a name='NewButton' href='#'"
+                       + " style='background-image:"
+                       + " url(../wymeditor/skins/default/icons.png)'>"
+                       + "Do something"
+                       + "</a></li>";
+        // add the button to the tools box
+        $(wym._box)
+            .find(wym._options.toolsSelector + wym._options.toolsListSelector)
+            .append($(video_html));
+        // handle click event
+        $(wym._box)
+          .find('li.wym_tools_newbutton a').click(function() {
+          //do something
+          wym.insert('<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/sZ_mVjtQ-j8?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/sZ_mVjtQ-j8?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>');
+          return(false);
+        });
       },
       classesHtml: '',
       containersHtml: '',
@@ -49,6 +67,7 @@
         = ricket_tab Page, :params => {:sort_order => 'name:down'}
         = ricket_tab Link, :name => 'Links', :params => {:sort_order => 'name:down'}
         = ricket_tab NewsItem, :name => 'News', :params => {:sort_order => 'name:down'}, :selected => ["admin/news_items","admin/news_categories"].include?(params[:controller])
+        = ricket_tab SplashImage, :name => 'Splash Images', :params => {:sort_order => 'name:down'}
         = ricket_tab MediaFile, :name => 'Media Files', :params => {:sort_order => 'name:down'}
         =# link_to "&nbsp;", user_session_path, :method => :delete, :class => 'close'
     .grid_16.ui-tabs-nav-bottom

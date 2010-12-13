@@ -1,4 +1,4 @@
-IpacCaltechEdu::Application.routes.draw do |map|
+AquagroupCom::Application.routes.draw do |map|
   root :to => 'home_pages#get'
 
   map_restfully :home_page
@@ -6,8 +6,6 @@ IpacCaltechEdu::Application.routes.draw do |map|
   map_restfully :page
   map_restfully :mrss_feed
   map_restfully :news_item
-  match 'news' => 'news_items#gets'
-  match 'gallery' => 'gallery_pages#gets'
   
   match 'admin' => 'admin/pages#gets'
   namespace :admin do
@@ -15,6 +13,7 @@ IpacCaltechEdu::Application.routes.draw do |map|
     map_restfully :link
     map_restfully :news_item
     map_restfully :news_category
+    map_restfully :splash_image
     map_restfully :media_file
     map_restfully :wymeditor_media_file
   end

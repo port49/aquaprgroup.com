@@ -1,15 +1,15 @@
 class NewsItemsController < ApplicationController
 
   def get
-    @page = Page.where(:name => "News Page").first
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
     end
   end
 
   def gets
-    @page = Page.where(:name => "News Page").first
+    respond_to do |format|
+      format.html
+    end
   end
   
 protected

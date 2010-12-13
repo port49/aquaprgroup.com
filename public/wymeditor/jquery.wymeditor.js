@@ -209,7 +209,7 @@ jQuery.extend(WYMeditor, {
     BLOCKS : new Array("address", "blockquote", "div", "dl",
 	   "fieldset", "form", "h1", "h2", "h3", "h4", "h5", "h6", "hr",
 	   "noscript", "ol", "p", "pre", "table", "ul", "dd", "dt",
-	   "li", "tbody", "td", "tfoot", "th", "thead", "tr"),
+	   "li", "tbody", "td", "tfoot", "th", "thead", "tr", "object"),
 
     KEY : {
       BACKSPACE: 8,
@@ -544,6 +544,29 @@ jQuery.fn.wymeditor = function(options) {
                       + WYMeditor.DIALOG_BODY
                       + "</html>",
                       
+    dialogVideoHtml:  "<body class='wym_dialog wym_dialog_video'"
+               + " onload='WYMeditor.INIT_DIALOG(" + WYMeditor.INDEX + ")'"
+               + ">"
+               + "<form>"
+               + "<fieldset>"
+               + "<input type='hidden' class='wym_dialog_type' value='"
+               + WYMeditor.DIALOG_VIDEO
+               + "' />"
+               + "<legend>{Youtube Link}</legend>"
+               + "<div class='row'>"
+               + "<label>{URL}</label>"
+               + "<input type='text' class='wym_href' value='' size='40' />"
+               + "</div>"
+               + "<div class='row row-indent'>"
+               + "<input class='wym_submit' type='button'"
+               + " value='{Submit}' />"
+               + "<input class='wym_cancel' type='button'"
+               + "value='{Cancel}' />"
+               + "</div>"
+               + "</fieldset>"
+               + "</form>"
+               + "</body>",
+    
     dialogLinkHtml:  "<body class='wym_dialog wym_dialog_link'"
                + " onload='WYMeditor.INIT_DIALOG(" + WYMeditor.INDEX + ")'"
                + ">"
@@ -2002,6 +2025,17 @@ WYMeditor.XhtmlValidator = {
     {
       "inside":"form"
     },
+    "embed":
+    {
+      "attributes":[
+        "src",
+        "type",
+        "allowscriptaccess",
+        "allowfullscreen",
+        "width",
+        "height"
+      ],
+    },
     "form":
     {
       "attributes":
@@ -2171,16 +2205,13 @@ WYMeditor.XhtmlValidator = {
     "29":"p",
     "param":
     {
-      "attributes":
-      {
-        "0":"type",
-        "valuetype":/^(data|ref|object)$/,
-        "1":"valuetype",
-        "2":"value"
-      },
-      "required":[
-      "name"
-      ]
+      "attributes":[
+        "type",
+        "valuetype",
+        "value",
+        "name"
+      ],
+      "inside":"object"
     },
     "30":"pre",
     "q":
@@ -2334,7 +2365,7 @@ WYMeditor.XhtmlValidator = {
     },
     "38":"tt",
     "39":"ul",
-    "40":"var"
+    "40":"var",
   },
 
   // Temporary skiped attributes
@@ -3384,13 +3415,13 @@ WYMeditor.XhtmlSaxListener = function()
     "dfn", "dl", "dt", "em", "fieldset", "form", "head", "h1", "h2",
     "h3", "h4", "h5", "h6", "html", "i", "ins",
     "kbd", "label", "legend", "li", "map", "noscript",
-    "object", "ol", "optgroup", "option", "p", "param", "pre", "q",
+    "object", "ol", "optgroup", "option", "p", "pre", "q",
     "samp", "script", "select", "small", "span", "strong", "style",
     "sub", "sup", "table", "tbody", "td", "textarea", "tfoot", "th",
     "thead", "title", "tr", "tt", "ul", "var", "extends"];
 
 
-    this.inline_tags = ["br", "hr", "img", "input"];
+    this.inline_tags = ["br", "hr", "img", "input", "embed", "param"];
 
     return this;
 };
@@ -3398,6 +3429,9 @@ WYMeditor.XhtmlSaxListener = function()
 WYMeditor.XhtmlSaxListener.prototype.shouldCloseTagAutomatically = function(tag, now_on_tag, closing)
 {
   var closing = closing || false;
+  if(tag == 'param' || tag == 'embed'){
+    return false;
+  }
   if(tag == 'td'){
     if((closing && now_on_tag == 'tr') || (!closing && now_on_tag == 'td')){
       return true;
@@ -3525,7 +3559,7 @@ WYMeditor.XhtmlSaxListener.prototype.closeUnopenedTag = function(tag)
 
 WYMeditor.XhtmlSaxListener.prototype.avoidStylingTagsAndAttributes = function()
 {
-  this.avoided_tags = ['div','span'];
+  this.avoided_tags = ['div','span','object','param','embed'];
   this.validator.skiped_attributes = ['style'];
   this.validator.skiped_attribute_values = ['MsoNormal','main1']; // MS Word attributes for class
   this._avoiding_tags_implicitly = true;

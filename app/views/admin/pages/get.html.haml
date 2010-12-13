@@ -41,6 +41,34 @@
                 %button.small-inline.ui-corner-all{:type => 'button', :onclick => '$(this.parentNode).remove()'} x
         :javascript
           $('ul.sortable').sortable();
+    .field
+      %label Videos:
+      .panel
+        .field
+          %label Title:
+          = text_field_tag 'videos_title', '', :class => 'string'
+        .field
+          %label Youtube Url:
+          = text_field_tag 'videos_url', '', :class => 'string'
+        .field
+          .float-right
+            .button-shell.ui-corner-all
+              %button.ui-corner-all{:type => 'button', :onclick => "Rickets.createVideoListItem($('ul#videos'), 'page');return false;"} Add Video
+        .clear
+        %ul#videos.sortable
+          - if @resource.videos
+            - @resource.videos.each do |video|
+              %li
+                %object{:width => "640", :height => "385"}
+                  %param{:name => "movie", :value => youtube_embed(video[:url])}
+                  %param{:name => "allowFullScreen", :value => "false"}
+                  %param{:name => "allowscriptaccess", :value => "always"}
+                  %embed{:src => youtube_embed(video[:url]), :type => "application/x-shockwave-flash", :allowscriptaccess => "always", :allowfullscreen => "true", :width => "640", :height => "385"}
+                = hidden_field_tag 'page[videos][][title]', video[:title]
+                = hidden_field_tag 'page[videos][][url]', video[:url]
+                %button.small-inline.ui-corner-all{:type => 'button', :onclick => '$(this.parentNode).remove()'} x
+        :javascript
+          $('ul.sortable').sortable();
     .clear
     .field
       = f.text_area :body, :class => 'wymeditor'

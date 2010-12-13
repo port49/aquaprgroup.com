@@ -1,0 +1,26 @@
+.container_12
+  .grid_9#splash-images
+    - SplashImage.all.each do |image|
+      .splash-pane
+        = image_tag(image.binary.url(:large))
+        .comment
+          = link_to image.description, image.url
+  .grid_3.latest
+    %h3.ui-widget-header
+      LATEST
+    - Link.latest.each do |link|
+      .blurb
+        - unless link.image_file_size.nil?
+          = link_to image_tag(link.image.url(:thumb)), link.url
+        = link_to link.name, link.url
+        %span.date
+          = date_format(link.created_at)
+        = link.body
+.clear.hr
+.container_12
+  - NewsItem.latest.each do |feature|
+    .grid_4
+      .feature
+        = link_to feature.name, news_item_path(feature)
+        %p
+          = feature.abstract
