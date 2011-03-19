@@ -24,5 +24,8 @@ class Page < ActiveRecord::Base
     end
     return select
   end
-  
+
+  def to_param
+    "#{id}-#{name.gsub(' ', '-')}"
+  end
 end

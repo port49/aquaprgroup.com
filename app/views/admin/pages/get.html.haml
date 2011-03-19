@@ -18,6 +18,18 @@
       = f.select :parent_id, @resource.hierarchy_for_select
       = indented_option_tags
     .field
+      %label Children Pages:
+      .panel
+        %ul#news-items.sortable
+          - @resource.children.each do |item|
+            %li.ui-corner.full
+              %div
+                = item.name
+                = hidden_field_tag 'children_pages[]', item.id
+        :javascript
+          $('ul.sortable').sortable();
+    .clear
+    .field
       %label Links:
       .panel
         .field
