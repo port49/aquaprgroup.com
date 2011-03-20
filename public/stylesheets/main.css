@@ -69,10 +69,19 @@ ul.top-nav a.selected {
   color: white;
 }
 
-.splash-pane {
+.pane {
   border: 1px solid #00c0f3;
+  display: none;
 }
-.splash-pane .comment {
+
+#pane1 {
+}
+
+.pane img {
+	width: 100%;
+}
+
+.pane .details {
   position: absolute;
   bottom: 0px;
   left: 0px;
@@ -83,7 +92,28 @@ ul.top-nav a.selected {
   filter: alpha(opacity=60);
   opacity: 0.6;
 }
-.splash-pane .comment a {
-  padding: 0.5em;
+
+.pane .details .comment {
+	width: 608px;
+	display: inline-block;
+  padding: 1.1em .5em .9em .5em;
+}
+
+.pane .details .comment a {
   color: white;
+}
+
+.pane .details .arrow {
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  display: inline-block;
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.pane .details .right {
+  float:right;
 }
