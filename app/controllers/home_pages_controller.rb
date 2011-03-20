@@ -2,6 +2,7 @@ class HomePagesController < ApplicationController
 
   def get
     @resource = Page.where(:name => "Home Page").first
+    @splashpanes = SplashImage.all
   end
 
 protected
