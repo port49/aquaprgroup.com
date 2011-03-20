@@ -13,8 +13,6 @@
   slideChange = function( command ) {
     totalPanes = $('#splash').attr('total');
     currentPane = $('#splash').attr('visible');
-    console.log("total panes " + totalPanes)
-    console.log("current pane " + currentPane)
 
     if (currentPane < totalPanes) {
       nextPane = currentPane - 0 + 1;
@@ -41,4 +39,4 @@
     }
   }
 
-  setInterval(slideChange, 10000)
+  setInterval(slideChange, 5000)
