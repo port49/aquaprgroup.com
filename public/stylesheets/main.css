@@ -114,6 +114,12 @@ ul.top-nav a.selected {
   vertical-align: middle;
 }
 
+.pane .details .arrow:hover {
+  cursor: pointer;
+  cursor: hand;
+}
+
+
 .pane .details .right {
   float:right;
 }
