@@ -25,6 +25,10 @@ class Page < ActiveRecord::Base
     return select
   end
 
+  def has_children?
+    !children.empty?
+  end
+
   def to_param
     "#{id}-#{name.gsub(' ', '-')}"
   end

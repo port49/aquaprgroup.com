@@ -2,6 +2,12 @@ class PagesController < ApplicationController
 
   def get
     @page = Page.find(params[:id])
+
+    if @page.has_children?
+      @branch = @page.parent
+    else
+      @branch = @page.parent.parent
+    end
   end
 
 protected

@@ -22,7 +22,7 @@ protected
   end
 
   def after_update
-    params[:children_pages].each_with_index do |id, index|
+    (params[:children_pages] || []).each_with_index do |id, index|
       if page = Page.find(id)
         page.position = index
         page.save

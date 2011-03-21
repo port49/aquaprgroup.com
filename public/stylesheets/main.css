@@ -65,7 +65,11 @@ ul.top-nav a.selected {
 }
 
 .footer {
+  padding: 0.5em 3em 0.7em;
   background-color: #00c0f3;
+  color: white;
+}
+.footer a {
   color: white;
 }
 
@@ -116,4 +120,11 @@ ul.top-nav a.selected {
 
 .pane .details .right {
   float:right;
+}
+
+.side-nav a {
+  padding: 0.3em 0 0.3em 1.2em;
+}
+.side-nav a.selected {
+  color: #00c0f3;
 }

@@ -1,8 +1,18 @@
 !!! Strict
 
-%html
+%html{:xmlns => "http://www.w3.org/1999/xhtml", 'xmlns:og'.to_sym => "http://ogp.me/ns#", 'xmlns:fb'.to_sym => "http://www.facebook.com/2008/fbml"}
   %head
     %meta{"http-equiv".to_sym => "Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{:property => "fb:admins", :content => "205583850860"}
+    %meta{:property => "og:type", :content => "company"}
+    - if @page
+      %meta{:property => "og:title", :content => "Aqua Communications: #{@page.name}"}
+      %meta{:property => "og:url", :content => page_path(@page)}
+    - else
+      %meta{:property => "og:title", :content => "Aqua Communications, Portsmouth, NH"}
+      %meta{:property => "og:url", :content => "http://aquaprgroup.com"}
+    %meta{:property => "og:image", :content => image_path('aquacommunications')}
+    %meta{:property => "og:site_name", :content => "Aqua Communications"}
     %title
       Aqua Communications, Portsmouth, NH
     = stylesheet_link_tag 'reset'
@@ -22,11 +32,22 @@
           - Page.home_page.children.each do |page|
             %li
               = link_to page.name.upcase, page_path(page), :class => "ui-state-default ui-corner-bottom#{@resource == page ? ' selected' : ''}"
+        %li
+          = link_to_function "SEARCH", 'function(){alert(\'boo\')}', :class => "ui-state-default ui-corner-bottom"
     .container_12
       = link_to image_tag('aquacommunications.png', :class => 'leaderboard'), root_path
     = yield
     .clear.hr
     .container_12.footer
+      %p
+        = link_to "Home", root_path
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        - if Page.home_page
+          - Page.home_page.children.each do |page|
+            = link_to page.name, page_path(page)
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+        All rights reserved. Total or partial reproduction prohibited.
+      %br
       %p
         Copyright 2010 Aqua Communication, LLC
         %br

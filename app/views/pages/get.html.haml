@@ -1,5 +1,5 @@
 .container_12
-  .grid_12
+  .grid_9
     %h1
       = @resource.name
     %p.posting-details
@@ -14,3 +14,14 @@
             %param{:name => "allowscriptaccess", :value => "always"}
             %embed{:src => youtube_embed(video[:url]), :type => "application/x-shockwave-flash", :allowscriptaccess => "always", :allowfullscreen => "true", :width => "640", :height => "385"}
     =raw @resource.body
+    .facebook
+      %script{:src => "http://connect.facebook.net/en_US/all.js#xfbml=1"}
+      %fb:like{:href => page_url(@page), :show_faces => 'false', :width => 450, :font => ''}
+  .grid_3.latest
+    - if @branch
+      - @branch.children.each do |header_page|
+        %h3.ui-widget-header
+          = link_to header_page.name.upcase, page_path(header_page)
+        - header_page.children.each do |side_page|
+          .side-nav
+            = link_to side_page.name, page_path(side_page), :class => (side_page == @page ? 'selected' : nil)
