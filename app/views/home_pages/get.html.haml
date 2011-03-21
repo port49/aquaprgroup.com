@@ -1,19 +1,19 @@
 .container_12
-  .grid_9#splash{:total => "#{@splashpanes.count}"}
+  .grid_9#splash{:total => "#{@splashpanes.count}", :visible => 0}
     - count = 1
     - @splashpanes.each do |image|
       .pane{:id => "pane#{count}"}
         = image_tag(image.binary.url(:large))
         .details
-          .arrow
+          .arrow{:onclick => "slideChange('previous')"}
             &lsaquo; 
           .comment
             = link_to image.description, image.url
-          .arrow.right
+          .arrow.right{:onclick => "slideChange('next')"}
             &rsaquo; 
       - count+=1
     %script
-      slideShow(3)
+      slideShow(1)
   .grid_3.latest
     %h3.ui-widget-header
       LATEST
