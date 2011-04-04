@@ -14,6 +14,7 @@ gem 'database_cleaner'
 gem 'spork'
 gem 'launchy'
 gem 'paperclip'
+gem 'texticle'
 
 group :test do
   gem "rspec", "2.0.0"

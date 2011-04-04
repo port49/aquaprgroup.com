@@ -17,14 +17,6 @@
       %label Items:
       .panel
         .field
-          %label Add Avm Image:
-          = text_field_tag 'links_title', '', :class => 'string'
-          %label &nbsp;
-          %ul.select-box
-            - AvmImage.unscoped.all.each do |item|
-              %li{:onclick => "Rickets.insertContainedItem('ul#items', this);", :itemid => item.id, :itemtype => item.class.table_name}
-                = item.name
-        .field
           %label Add Video:
           = text_field_tag 'links_title', '', :class => 'string'
           %label &nbsp;

@@ -34,7 +34,11 @@
             %li
               = link_to page.name.upcase, page_path(page), :class => "ui-state-default ui-corner-bottom#{@resource == page ? ' selected' : ''}"
         %li
-          = link_to_function "SEARCH", 'function(){alert(\'boo\')}', :class => "ui-state-default ui-corner-bottom"
+          .search{:onclick => "$('.search_form').show();", :class => "ui-state-default ui-corner-bottom"}
+            SEARCH
+            .search_form{:style => 'display:none'}
+              %form{:action => search_path}
+                %input{:name => "q", :type => "text", :value => ''}
     .container_12
       = link_to image_tag('aquacommunications.png', :class => 'leaderboard'), root_path
     = yield

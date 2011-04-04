@@ -4,10 +4,10 @@ module ApplicationHelper
   end
 
   def youtube_token(url)
-    url.match(/youtube.com\/watch\?v=([^&.]+)/)[1]
+    url.match(/youtube.com\/watch\?v=([^&.]+)/)[1] if url
   end
 
   def youtube_embed(url)
-    "http://www.youtube.com/v/#{youtube_token(url)}?fs=1&amp;hl=en_US"
+    "http://www.youtube.com/v/#{youtube_token(url)}?fs=1&amp;hl=en_US" if url
   end
 end

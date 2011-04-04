@@ -4,9 +4,10 @@ AquagroupCom::Application.routes.draw do |map|
   map_restfully :home_page
   map_restfully :gallery_page
   map_restfully :page
+  map_restfully :search
   map_restfully :mrss_feed
   map_restfully :news_item
-  
+
   match 'admin' => 'admin/pages#gets'
   namespace :admin do
     map_restfully :page

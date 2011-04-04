@@ -9,6 +9,12 @@ class Page < ActiveRecord::Base
 
   validates_presence_of :parent_id
 
+  # tsearch
+  index do
+    name
+    body
+  end
+
   def self.root
     self.where("parent_id=id").first
   end

@@ -19,11 +19,11 @@ ul.top-nav {
   float: right;
   list-style: none;
 }
-ul.top-nav li {
+ul.top-nav li, ul.top-nav .search{
 	display: inline;
   margin: 0;
 }
-ul.top-nav a {
+ul.top-nav a, ul.top-nav .search {
   padding: 0.3em 0.7em;
   font-weight: bold;
   font-size: 1em;
@@ -31,6 +31,23 @@ ul.top-nav a {
 ul.top-nav a.selected {
   background-color: grey;
 }
+.search_form form {
+  display: inline;
+  margin: none;
+}
+.search_form {
+  display: inline;
+  padding-left: 5px;
+}
+.search_form input {
+  display: inline;
+  width: 144px;
+  height: 14px;
+  border: none;
+  font-size: 12px;
+  background-color: #f5f5f5;
+}
+
 
 .latest h3 {
   padding: 0.1em 0.7em;

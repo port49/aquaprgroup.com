@@ -2,7 +2,7 @@ class NewsItem < ActiveRecord::Base
   include Pendable
   include Visible
   include Containable
-  
+
   contained_by :news_categories
   contained_by :packages
 
@@ -13,6 +13,12 @@ class NewsItem < ActiveRecord::Base
     :thumb  => "72x72#",
     :medium => "250x250#"
   }, :url => "/system/#{self.table_name}/:attachment/:id/:style/:filename"
+
+  # tsearch
+  index do
+    name
+    body
+  end
 
   def before_update_pending(attrs)
     self.update_attributes(:image => attrs['image']) if attrs['image']

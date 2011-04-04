@@ -3,7 +3,6 @@ class Package < ActiveRecord::Base
   include Visible
   include Containable
   
-  contains :avm_images
   contains :videos
   contains :news_items
   
