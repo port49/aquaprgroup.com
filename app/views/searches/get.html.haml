@@ -1,0 +1,20 @@
+.container_12
+  .grid_9
+    %h1
+      Search Results
+    %h2
+      News
+    - if @news_items.empty?
+      No news items matched your search terms.
+    - else
+      - @news_items.each do |news_item|
+        .search_result
+          = link_to news_item.name, news_item_path(news_item)
+    %h2
+      Pages
+    - if @pages.empty?
+      No pages matched your search terms.
+    - else
+      - @pages.each do |page|
+        .search_result
+          = link_to page.name, page_path(page)
